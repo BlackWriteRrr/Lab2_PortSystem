@@ -18,8 +18,8 @@ public class MainWindow {
     private PortSystem portSystem;
     private PortTableInformation portTableInformation;
     private PierTableInformation pierTableInformation;
-    public static Table table_4;
-    public static Table table_6;
+    public static Table tableListShip;
+    public static Table tableQueueShips;
     private Display display;
     private Shell shell;
 
@@ -85,34 +85,36 @@ public class MainWindow {
         btnNewButton_1.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-                int selectedShip = table_4.getSelectionIndex();
-                String shipName = table_4.getItem(selectedShip).getText(0);
-                if(MapShips.getMapShips().getShip(shipName).getStatus().equals("Nothing")) {
-                    MootShipToPier mootShipToPier = new MootShipToPier(shell, 2, MapShips.getMapShips().getShip(shipName));
-                    mootShipToPier.open(getWindow(), portSystem);
+                int selectedShip = tableListShip.getSelectionIndex();
+                if(selectedShip!=-1) {
+                    String shipName = tableListShip.getItem(selectedShip).getText(0);
+                    if (MapShips.getMapShips().getShip(shipName).getStatus().equals("Nothing")) {
+                        MootShipToPier mootShipToPier = new MootShipToPier(shell, 2, MapShips.getMapShips().getShip(shipName));
+                        mootShipToPier.open(getWindow(), portSystem);
+                    }
                 }
             }
         });
 
-        table_4 = new Table(shell, SWT.BORDER | SWT.FULL_SELECTION);
-        table_4.setBounds(32, 46, 168, 198);
-        table_4.setHeaderVisible(true);
-        table_4.setLinesVisible(true);
+        tableListShip = new Table(shell, SWT.BORDER | SWT.FULL_SELECTION);
+        tableListShip.setBounds(32, 46, 168, 198);
+        tableListShip.setHeaderVisible(true);
+        tableListShip.setLinesVisible(true);
 
-        TableColumn tblclmnNewColumn = new TableColumn(table_4, SWT.CENTER);
+        TableColumn tblclmnNewColumn = new TableColumn(tableListShip, SWT.CENTER);
         tblclmnNewColumn.setWidth(79);
         tblclmnNewColumn.setText("List of ships");
 
-        TableColumn tblclmnStatus = new TableColumn(table_4, SWT.NONE);
+        TableColumn tblclmnStatus = new TableColumn(tableListShip, SWT.NONE);
         tblclmnStatus.setWidth(84);
         tblclmnStatus.setText("Status");
 
-        table_6 = new Table(shell, SWT.BORDER | SWT.FULL_SELECTION);
-        table_6.setBounds(293, 46, 168, 198);
-        table_6.setHeaderVisible(true);
-        table_6.setLinesVisible(true);
+        tableQueueShips = new Table(shell, SWT.BORDER | SWT.FULL_SELECTION);
+        tableQueueShips.setBounds(293, 46, 168, 198);
+        tableQueueShips.setHeaderVisible(true);
+        tableQueueShips.setLinesVisible(true);
 
-        TableColumn tblclmnNewColumn_2 = new TableColumn(table_6, SWT.CENTER);
+        TableColumn tblclmnNewColumn_2 = new TableColumn(tableQueueShips, SWT.CENTER);
         tblclmnNewColumn_2.setWidth(162);
         tblclmnNewColumn_2.setText("Ship name");
 

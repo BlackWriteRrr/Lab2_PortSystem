@@ -24,8 +24,8 @@ public class MootShipToPier extends Dialog {
     private Display display;
     private Shell shell;
     protected Object result;
-    private Text text;
-    private Text text_1;
+    private Text textTime;
+    private Text textNeedQuantity;
     private Label IncorrectQuantity;
     private Label IncorrectTime;
     private Ship ship;
@@ -77,8 +77,8 @@ public class MootShipToPier extends Dialog {
         lblInput.setBounds(23, 50, 116, 25);
         lblInput.setText("Enter the time");
 
-        text = new Text(shell, SWT.BORDER);
-        text.setBounds(156, 51, 66, 24);
+        textTime = new Text(shell, SWT.BORDER);
+        textTime.setBounds(156, 51, 66, 24);
 
         Label lblEnterTheQuantity = new Label(shell, SWT.NONE);
         lblEnterTheQuantity.setText("Enter the quantity");
@@ -86,8 +86,8 @@ public class MootShipToPier extends Dialog {
         lblEnterTheQuantity.setAlignment(SWT.CENTER);
         lblEnterTheQuantity.setBounds(23, 91, 116, 24);
 
-        text_1 = new Text(shell, SWT.BORDER);
-        text_1.setBounds(156, 91, 66, 24);
+        textNeedQuantity = new Text(shell, SWT.BORDER);
+        textNeedQuantity.setBounds(156, 91, 66, 24);
 
         Button btnMoot = new Button(shell, SWT.NONE);
         btnMoot.setBounds(156, 142, 66, 25);
@@ -118,20 +118,22 @@ public class MootShipToPier extends Dialog {
     }
 
     public void checkAndMoot(PortSystem portSystem) {
+        if(!ship.getStatus().equals("Nothing"))
+            return;;
         int flag = 0;
-        if (!checkTime(text.getText())) {
+        if (!checkTime(textTime.getText())) {
             IncorrectTime.setVisible(true);
             flag = 1;
         } else IncorrectTime.setVisible(false);
 
-        if (!checkQuantity(text_1.getText())) {
+        if (!checkQuantity(textNeedQuantity.getText()) && !checkQuantity(textNeedQuantity.getText(),ship,portSystem)) {
             IncorrectQuantity.setVisible(true);
             flag = 1;
         } else IncorrectQuantity.setVisible(false);
 
         if (flag == 0) {
-            int time = Integer.parseInt(text.getText());
-            int needQuantity = Integer.parseInt(text_1.getText());
+            int time = Integer.parseInt(textTime.getText());
+            int needQuantity = Integer.parseInt(textNeedQuantity.getText());
             ship.setTime(time);
             ship.setNeedQuantity(needQuantity);
 

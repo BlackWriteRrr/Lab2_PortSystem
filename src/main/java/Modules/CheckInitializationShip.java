@@ -16,6 +16,18 @@ public class CheckInitializationShip {
         else return true;
     }
 
+    public static boolean checkQuantity(String Quantity, Ship ship, PortSystem portSystem){
+        int quantity = Integer.parseInt(Quantity);
+        switch (ship.getProduct()){
+            case "Bread" : if((quantity - ship.getQuantity())<portSystem.getStock().getBread()) return true;
+            case "Milk" : if((quantity - ship.getQuantity())<portSystem.getStock().getMilk()) return true;
+            case "Meat" : if((quantity - ship.getQuantity())<portSystem.getStock().getMeat()) return true;
+            case "Fruit" :  if((quantity - ship.getQuantity())<portSystem.getStock().getFruit()) return true;
+            case "Potatoes" :  if((quantity - ship.getQuantity())<portSystem.getStock().getPotatoes()) return true;
+        }
+       return false;
+    }
+
     public static boolean checkTime(String Time){
         if(Time.isEmpty()) return false;
         int time = Integer.parseInt(Time);

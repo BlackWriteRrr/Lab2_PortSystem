@@ -20,10 +20,10 @@ public class UpdateForm {
 
     public void updateFormListShip() throws InterruptedException {
 
-        mainWindow.table_4.removeAll();
+        mainWindow.tableListShip.removeAll();
         int i=0;
         for(HashMap.Entry<String, Ship> entry: MapShips.getMapShips().getShipMap().entrySet()){
-            TableItem tableItem = new TableItem(mainWindow.table_4, SWT.NONE,i++);
+            TableItem tableItem = new TableItem(mainWindow.tableListShip, SWT.NONE,i++);
             tableItem.setText(new String[]{
                     entry.getKey() ,
                     entry.getValue().getStatus()
@@ -33,10 +33,10 @@ public class UpdateForm {
 
     public void updateFormQueue(PriorityBlockingQueue<Ship> ships) throws InterruptedException {
 
-        mainWindow.table_6.removeAll();
+        mainWindow.tableQueueShips.removeAll();
         int i=0;
         while (!ships.isEmpty()){
-            TableItem tableItem = new TableItem(mainWindow.table_6, SWT.NONE,i++);
+            TableItem tableItem = new TableItem(mainWindow.tableQueueShips, SWT.NONE,i++);
             tableItem.setText(new String[]{
                     ships.poll().getName()
             });

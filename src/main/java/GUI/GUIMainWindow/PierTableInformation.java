@@ -83,7 +83,7 @@ public class PierTableInformation {
         tableItemProduct[number].setText("Product");
 
         lblPort[number] = new Label(shell, SWT.NONE);
-        lblPort[number].setText("Pier " + number);
+        lblPort[number].setText("Pier " + (number+1));
         lblPort[number].setAlignment(SWT.CENTER);
         lblPort[number].setBounds(i, 283, 168, 17);
     }

@@ -142,6 +142,7 @@ public class PortSystem {
                 });
 
                 SEMAPHORE.release();
+                LoggerApp.getLogger().info("Ship " + ship.getName() + " exit pier " + (finalParkingNumber+1));
 
                 Display.getDefault().syncExec(new Runnable() {
                     @Override
@@ -181,6 +182,7 @@ public class PortSystem {
         if(time > ship.getTime()){
             int fine = time - ship.getTime();
             MapShips.getMapShips().getShip(ship.getName()).setFine(ship.getFine() - time);
+            LoggerApp.getLogger().info("Ship " + ship.getName() + " Received a fine " + fine);
         }
     }
 
