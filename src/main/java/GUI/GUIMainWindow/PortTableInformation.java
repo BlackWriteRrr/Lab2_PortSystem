@@ -10,40 +10,38 @@ import org.eclipse.swt.widgets.*;
  */
 public class PortTableInformation {
     private Shell shell;
-    private static Table table_5;
+    private static Table tablePortInformation;
+    private Table tablePierTimeLimitInf;
     private TableItem tableItemMeat;
-    private  TableItem tableItemBread;
-    private  TableItem tableItemMilk;
-    private  TableItem tableItemFruit;
-    private  TableItem tableItemPotatoes;
+    private TableItem tableItemBread;
+    private TableItem tableItemMilk;
+    private TableItem tableItemFruit;
+    private TableItem tableItemPotatoes;
 
-    public PortTableInformation(Shell shell){
+    public PortTableInformation(Shell shell) {
         this.shell = shell;
     }
 
-    public void setContent(Stock stock){
-        table_5 = new Table(shell, SWT.BORDER | SWT.FULL_SELECTION);
-        table_5.setBounds(564, 46, 439, 198);
-        table_5.setHeaderVisible(true);
-        table_5.setLinesVisible(true);
+    public void setContent(Stock stock) {
+        tablePortInformation = new Table(shell, SWT.BORDER | SWT.FULL_SELECTION);
+        tablePortInformation.setBounds(564, 46, 127, 198);
+        tablePortInformation.setHeaderVisible(true);
+        tablePortInformation.setLinesVisible(true);
 
-        TableColumn tblclmnProducts = new TableColumn(table_5, SWT.NONE);
+        TableColumn tblclmnProducts = new TableColumn(tablePortInformation, SWT.NONE);
         tblclmnProducts.setWidth(61);
         tblclmnProducts.setText("Products");
 
-        TableColumn tblclmnQuantity = new TableColumn(table_5, SWT.NONE);
+        TableColumn tblclmnQuantity = new TableColumn(tablePortInformation, SWT.NONE);
         tblclmnQuantity.setWidth(62);
         tblclmnQuantity.setText("Quantity");
 
-        TableColumn tblclmnPierLog = new TableColumn(table_5, SWT.CENTER);
-        tblclmnPierLog.setWidth(311);
-        tblclmnPierLog.setText("Pier log");
 
-        tableItemMeat = new TableItem(table_5, SWT.NONE);
-        tableItemBread = new TableItem(table_5, SWT.NONE);
-        tableItemMilk = new TableItem(table_5, SWT.NONE);
-        tableItemFruit = new TableItem(table_5, SWT.NONE);
-        tableItemPotatoes = new TableItem(table_5, SWT.NONE);
+        tableItemMeat = new TableItem(tablePortInformation, SWT.NONE);
+        tableItemBread = new TableItem(tablePortInformation, SWT.NONE);
+        tableItemMilk = new TableItem(tablePortInformation, SWT.NONE);
+        tableItemFruit = new TableItem(tablePortInformation, SWT.NONE);
+        tableItemPotatoes = new TableItem(tablePortInformation, SWT.NONE);
 
         setTableItems(stock);
 
@@ -52,15 +50,28 @@ public class PortTableInformation {
         lblPortInformation.setAlignment(SWT.CENTER);
         lblPortInformation.setBounds(695, 9, 161, 25);
         lblPortInformation.setText("Port information");
+
+        tablePierTimeLimitInf = new Table(shell, SWT.BORDER | SWT.FULL_SELECTION);
+        tablePierTimeLimitInf.setBounds(697, 46, 306, 198);
+        tablePierTimeLimitInf.setHeaderVisible(true);
+        tablePierTimeLimitInf.setLinesVisible(true);
+
+        TableColumn tblclmnPierTimelimitInformation = new TableColumn(tablePierTimeLimitInf, SWT.CENTER);
+        tblclmnPierTimelimitInformation.setWidth(300);
+        tblclmnPierTimelimitInformation.setText("Pier time-limit information");
     }
 
-    public void setTableItems(Stock stock){
-        tableItemMeat.setText(new String[]{"Meat","" + stock.getMeat()});
-        tableItemMilk.setText(new String[]{"Milk","" + stock.getMilk()});
-        tableItemBread.setText(new String[]{"Bread","" + stock.getBread()});
-        tableItemFruit.setText(new String[]{"Fruit","" + stock.getFruit()});
-        tableItemPotatoes.setText(new String[]{"Potatoes","" + stock.getPotatoes()});
+    public void setTableItems(Stock stock) {
+        tableItemMeat.setText(new String[]{"Meat", "" + stock.getMeat()});
+        tableItemMilk.setText(new String[]{"Milk", "" + stock.getMilk()});
+        tableItemBread.setText(new String[]{"Bread", "" + stock.getBread()});
+        tableItemFruit.setText(new String[]{"Fruit", "" + stock.getFruit()});
+        tableItemPotatoes.setText(new String[]{"Potatoes", "" + stock.getPotatoes()});
     }
 
+    public void addShipTimeLimit(String info){
+        TableItem tableItem = new TableItem(tablePierTimeLimitInf, SWT.NONE);
+        tableItem.setText(info);
+    }
 
 }

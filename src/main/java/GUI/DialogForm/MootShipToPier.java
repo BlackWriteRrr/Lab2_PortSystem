@@ -3,6 +3,7 @@ package GUI.DialogForm;
 import GUI.GUIMainWindow.MainWindow;
 import GUI.GUIMainWindow.UpdateForm;
 import GUI.SWTResourceManager;
+import Logger.LoggerApp;
 import Modules.PortSystem;
 import Modules.Ship;
 import Storage.MapShips;
@@ -141,7 +142,7 @@ public class MootShipToPier extends Dialog {
                     portSystem.mootToPier(PriorityQueue.getPriorityQueue().getShip());
 
                 } catch (InterruptedException e1) {
-                    e1.printStackTrace();
+                    LoggerApp.getLogger().error(e1);
                 }
             }
 
@@ -150,7 +151,7 @@ public class MootShipToPier extends Dialog {
                 updateForm.updateFormListShip();
                 updateForm.updateFormQueue(PriorityQueue.getPriorityQueue().getMas());
             } catch (InterruptedException e1) {
-                e1.printStackTrace();
+                LoggerApp.getLogger().error(e1);
             }
 
             shell.close();

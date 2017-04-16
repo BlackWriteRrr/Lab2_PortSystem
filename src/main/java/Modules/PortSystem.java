@@ -1,6 +1,7 @@
 package Modules;
 
 import GUI.GUIMainWindow.MainWindow;
+import Logger.LoggerApp;
 import Storage.MapShips;
 import Storage.PriorityQueue;
 import org.eclipse.swt.widgets.Display;
@@ -48,7 +49,7 @@ public class PortSystem {
                         try {
                             mainWindow.getUpdateForm().updateFormListShip();
                         } catch (InterruptedException e) {
-                            e.printStackTrace();
+                            LoggerApp.getLogger().error(e);
                         }
                     }
                 });
@@ -62,6 +63,8 @@ public class PortSystem {
                             break;
                         }
                 }
+
+                LoggerApp.getLogger().info("Moot ship " + ship.getName() + " to pier " + (parkingNumber+1));
 
                 synchronized (stock){
                     int quantity = ship.getQuantity() - ship.getNeedQuantity();
@@ -110,7 +113,20 @@ public class PortSystem {
                     }
                 }.start();
 
+                if(time <= ship.getTime())
                 Thread.sleep(time*1000);
+
+                else  {
+                    Thread.sleep(ship.getTime()*1000);
+                    Display.getDefault().asyncExec(new Runnable() {
+                        public void run() {
+                            mainWindow.getPortTableInformation().addShipTimeLimit("Ship " + ship.getName()
+                                    + " in pier " + (finalParkingNumber+1) +  " exceeded the time limit");
+                        }
+                    });
+                    Thread.sleep((time-ship.getTime())*1000);
+                }
+
                 updateShipInf(ship, time);
 
                 synchronized (PIER_PLACES) {
@@ -138,7 +154,7 @@ public class PortSystem {
                                 mainWindow.getUpdateForm().updateFormQueue(PriorityQueue.getPriorityQueue().getMas());
                             }
                         } catch (InterruptedException e) {
-                            e.printStackTrace();
+                            LoggerApp.getLogger().error(e);
                         }
                     }
                 });

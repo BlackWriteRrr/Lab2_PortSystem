@@ -3,6 +3,7 @@ package GUI.DialogForm;
 import GUI.GUIMainWindow.MainWindow;
 import GUI.GUIMainWindow.UpdateForm;
 import GUI.SWTResourceManager;
+import Logger.LoggerApp;
 import Modules.Ship;
 import Storage.MapShips;
 import org.eclipse.swt.SWT;
@@ -165,13 +166,13 @@ public class AddShip extends Dialog {
 
             Ship ship = new Ship(text.getText(),comboProducts.getText(),Integer.parseInt(text_1.getText()),priority);
 
-
+            LoggerApp.getLogger().info("Add ship " + ship.getName() + " in our list");
             MapShips.getMapShips().add(ship);
 
             try {
                 updateForm.updateFormListShip();
             } catch (InterruptedException e1) {
-                e1.printStackTrace();
+                LoggerApp.getLogger().error(e1);
             }
             shell.close();
 
