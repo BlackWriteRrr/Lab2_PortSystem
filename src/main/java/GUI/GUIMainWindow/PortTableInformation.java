@@ -17,11 +17,18 @@ public class PortTableInformation {
     private TableItem tableItemMilk;
     private TableItem tableItemFruit;
     private TableItem tableItemPotatoes;
-
+    /**
+     * install shell from main window
+     * @param shell from main window
+     */
     public PortTableInformation(Shell shell) {
         this.shell = shell;
     }
 
+    /**
+     * Initialization all components
+     * @param stock describes the content of our portSystem
+     */
     public void setContent(Stock stock) {
         tablePortInformation = new Table(shell, SWT.BORDER | SWT.FULL_SELECTION);
         tablePortInformation.setBounds(564, 46, 127, 198);
@@ -61,6 +68,10 @@ public class PortTableInformation {
         tblclmnPierTimelimitInformation.setText("Pier time-limit information");
     }
 
+    /**
+     * update information on the table about stock portSystem
+     * @param stock describes the content of our portSystem
+     */
     public void setTableItems(Stock stock) {
         tableItemMeat.setText(new String[]{"Meat", "" + stock.getMeat()});
         tableItemMilk.setText(new String[]{"Milk", "" + stock.getMilk()});
@@ -69,6 +80,10 @@ public class PortTableInformation {
         tableItemPotatoes.setText(new String[]{"Potatoes", "" + stock.getPotatoes()});
     }
 
+    /**
+     * show information on table about ships, which have problems with timeLimit
+     * @param info information about ship, which limit time in our pier
+     */
     public void addShipTimeLimit(String info){
         TableItem tableItem = new TableItem(tablePierTimeLimitInf, SWT.NONE);
         tableItem.setText(info);

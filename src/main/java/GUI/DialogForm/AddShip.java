@@ -55,8 +55,9 @@ public class AddShip extends Dialog {
             }
         }
     }
+
     /**
-     * Create contents of the dialog.
+     * create content in dialog dorm
      */
     private void createContents() {
         shell = new Shell(getParent(), SWT.DIALOG_TRIM | SWT.MIN | SWT.RESIZE);
@@ -122,7 +123,12 @@ public class AddShip extends Dialog {
     }
 
 
-
+    /**
+     * in this function we show incorrect label, when input incorrect value
+     * @param i determined high our label element
+     * @param j determined width our label element
+     * @param label our label element
+     */
     public void showIncorrectValue(int i, int j, Label label){
         label.setFont(SWTResourceManager.getFont("Segoe UI", 12, SWT.NORMAL));
         label.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_CYAN));
@@ -133,6 +139,9 @@ public class AddShip extends Dialog {
         label.setVisible(false);
     }
 
+    /**
+     * in this function we check all field, and if we input incorrect value, show incorrectValue
+     */
     public void checkAndAddShop(){
         int flag = 0;
         if (!checkName(text.getText())){

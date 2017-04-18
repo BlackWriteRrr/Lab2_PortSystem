@@ -14,10 +14,18 @@ import java.util.concurrent.PriorityBlockingQueue;
 public class UpdateForm {
     private MainWindow mainWindow;
 
+    /**
+     * get and set ref main window
+     * @param mainWindow ref our main window
+     */
     public UpdateForm(MainWindow mainWindow){
         this.mainWindow = mainWindow;
     }
 
+    /**
+     * update information about ships in main window
+     * @throws InterruptedException
+     */
     public void updateFormListShip() throws InterruptedException {
 
         mainWindow.tableListShip.removeAll();
@@ -31,6 +39,11 @@ public class UpdateForm {
         }
     }
 
+    /**
+     * update information about ships in main window
+     * @param ships describe ship which stay in queue in the port
+     * @throws InterruptedException
+     */
     public void updateFormQueue(PriorityBlockingQueue<Ship> ships) throws InterruptedException {
 
         mainWindow.tableQueueShips.removeAll();

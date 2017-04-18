@@ -85,6 +85,9 @@ public class FullInformation extends Dialog {
 
     }
 
+    /**
+     * in this function we Fill in table our information about ships
+     */
     public void setFullInfoAboutShips(){
         tableShips.removeAll();
         int i=0;

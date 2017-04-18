@@ -17,11 +17,17 @@ public class PierTableInformation {
     private TableItem [] tableItemProduct;
     private  ProgressBar[] progressBar;
 
-
+    /**
+     * install shell from main window
+     * @param shell from main window
+     */
     public PierTableInformation(Shell shell){
         this.shell = shell;
     }
 
+    /**
+     * Initialization all components
+     */
     public void setContent(){
 
         tablePier = new Table[4];
@@ -38,6 +44,11 @@ public class PierTableInformation {
 
     }
 
+    /**
+     * in this function we show in main window information about ship in pier
+     * @param ship determined ship, which moot to this pier
+     * @param i number of pier
+     */
     public void updatePierTable(Ship ship, int i){
         tableItemStatus[i].setText(new String[]{"Status","Work" });
         tableItemName[i].setText(new String[]{"Ship name", ship.getName() });
@@ -48,6 +59,10 @@ public class PierTableInformation {
         tableItemProduct[i].setText(new String[]{"Product", ship.getProduct() });
     }
 
+    /**
+     * in this function we delete information about ship in pier
+     * @param i number of pier
+     */
     public void deletePierTable(int i){
         tableItemStatus[i].setText(new String[]{"Status", "Nothing" });
         tableItemName[i].setText(new String[]{"Ship name", "" });
@@ -55,6 +70,11 @@ public class PierTableInformation {
         tableItemProduct[i].setText(new String[]{"Product", "" });
     }
 
+    /**
+     * in this function we set all table about pier i main window
+     * @param i width in window our pier
+     * @param number of pier
+     */
     private void setTable(int i, int number){
         tablePier[number] = new Table(shell, SWT.BORDER | SWT.FULL_SELECTION);
         tablePier[number].setLinesVisible(true);

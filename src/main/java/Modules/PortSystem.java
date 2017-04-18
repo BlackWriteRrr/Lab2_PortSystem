@@ -18,17 +18,30 @@ public class PortSystem {
     private static Stock stock;
     private static MainWindow mainWindow;
 
+    /**
+     * initialization
+     * @param shell set shell from main window
+     * @param mainWindow set ref our main window
+     */
     public PortSystem(Shell shell, MainWindow mainWindow){
         stock = new Stock();
         this.mainWindow = mainWindow;
     }
 
+    /**
+     * in this function we create current to moot to pier
+     * @param ship info about ship, which want to moot to pier
+     * @throws InterruptedException
+     */
     public static void mootToPier(Ship ship) throws InterruptedException {
         int time = Math.abs(ship.getQuantity() - ship.getNeedQuantity());
         new Thread(new Port(time, ship)).start();
         Thread.sleep(400);
     }
 
+    /**
+     * Our inner class for work in pier
+     */
     public static class Port implements Runnable {
         private int time;
         private Ship ship;
@@ -41,7 +54,9 @@ public class PortSystem {
         @Override
         public void run() {
             try {
+                //acquire semaphore
                 SEMAPHORE.acquire();
+                //show status info about ship in pier in main window
                 Display.getDefault().syncExec(new Runnable() {
                     @Override
                     public void run() {
@@ -53,7 +68,7 @@ public class PortSystem {
                         }
                     }
                 });
-
+                //check free place in stock
                 int parkingNumber = -1;
                 synchronized (PIER_PLACES){
                     for (int i = 0; i < 4; i++)
@@ -85,7 +100,7 @@ public class PortSystem {
                         mainWindow.getPierTableInformation().updatePierTable(ship, finalParkingNumber);
                     }
                 });
-
+                // create new tread to show progress bar
                 final int timeTread = (int) (time * 9.75);
                 new Thread() {
                     @Override
@@ -143,7 +158,7 @@ public class PortSystem {
 
                 SEMAPHORE.release();
                 LoggerApp.getLogger().info("Ship " + ship.getName() + " exit pier " + (finalParkingNumber+1));
-
+                //check info in queue and if ships stay here we moot his in pier
                 Display.getDefault().syncExec(new Runnable() {
                     @Override
                     public void run() {
@@ -167,6 +182,10 @@ public class PortSystem {
 
     }
 
+    /**
+     *
+     * @return boolean type , if place free return true
+     */
     public static boolean checkMootToPier(){
         boolean check = false;
         for (int i = 0; i < 4; i++)
@@ -177,6 +196,11 @@ public class PortSystem {
         return  (check &&  !Storage.PriorityQueue.getPriorityQueue().isEmpty());
     }
 
+    /**
+     * set fine in ship
+     * @param ship info about ship
+     * @param time info about time
+     */
     public static void updateShipInf(Ship ship, int time){
         MapShips.getMapShips().getShip(ship.getName()).setQuantity(ship.getNeedQuantity());
         if(time > ship.getTime()){

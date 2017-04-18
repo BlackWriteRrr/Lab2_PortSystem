@@ -51,6 +51,9 @@ public class MainWindow {
         }
     }
 
+    /**
+     * crete all contents in main window
+     */
     public void createContents() {
 
         shell = new Shell();
@@ -69,6 +72,7 @@ public class MainWindow {
         btnNewButton.setBounds(32, 10, 60, 25);
         btnNewButton.setText("Add Ship");
 
+        //call addShip window
         btnNewButton.addSelectionListener(
                 new SelectionAdapter() {
                     public void widgetSelected(SelectionEvent e) {
@@ -82,6 +86,7 @@ public class MainWindow {
         btnNewButton_1.setBounds(98, 10, 44, 25);
         btnNewButton_1.setText("Moor");
 
+        //check on correct action and call mootToPier window
         btnNewButton_1.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {

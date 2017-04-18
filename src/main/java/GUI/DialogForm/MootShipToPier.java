@@ -107,6 +107,11 @@ public class MootShipToPier extends Dialog {
 
     }
 
+    /**
+     * in this function we show incorrect label, when input incorrect value
+     * @param i determined high our label element
+     * @param label our label element
+     */
     public void showIncorrectValue(int i, Label label) {
         label.setFont(SWTResourceManager.getFont("Segoe UI", 12, SWT.NORMAL));
         label.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_CYAN));
@@ -117,6 +122,10 @@ public class MootShipToPier extends Dialog {
         label.setVisible(false);
     }
 
+    /**
+     * in this function we check all field, and if we input incorrect value, show incorrectValue
+     * @param portSystem determined our port
+     */
     public void checkAndMoot(PortSystem portSystem) {
         if(!ship.getStatus().equals("Nothing"))
             return;;
