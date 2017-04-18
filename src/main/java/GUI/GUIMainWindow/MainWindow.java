@@ -1,6 +1,7 @@
 package GUI.GUIMainWindow;
 
 import GUI.DialogForm.AddShip;
+import GUI.DialogForm.FullInformation;
 import GUI.DialogForm.MootShipToPier;
 import GUI.SWTResourceManager;
 import Modules.PortSystem;
@@ -76,10 +77,9 @@ public class MainWindow {
                     }
                 });
 
-
         Button btnNewButton_1 = new Button(shell, SWT.NONE);
         btnNewButton_1.setForeground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_FOREGROUND));
-        btnNewButton_1.setBounds(98, 10, 60, 25);
+        btnNewButton_1.setBounds(98, 10, 44, 25);
         btnNewButton_1.setText("Moor");
 
         btnNewButton_1.addSelectionListener(new SelectionAdapter() {
@@ -95,6 +95,18 @@ public class MainWindow {
                 }
             }
         });
+
+        Button btnFullInfo = new Button(shell, SWT.NONE);
+        btnFullInfo.setBounds(148, 10, 52, 25);
+        btnFullInfo.setText("Full Info");
+
+        btnFullInfo.addSelectionListener(
+                new SelectionAdapter() {
+                    public void widgetSelected(SelectionEvent e) {
+                        FullInformation ship = new FullInformation(shell,2);
+                        ship.open();
+                    }
+                });
 
         tableListShip = new Table(shell, SWT.BORDER | SWT.FULL_SELECTION);
         tableListShip.setBounds(32, 46, 168, 198);

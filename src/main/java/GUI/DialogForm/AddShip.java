@@ -136,6 +136,7 @@ public class AddShip extends Dialog {
     public void checkAndAddShop(){
         int flag = 0;
         if (!checkName(text.getText())){
+            LoggerApp.getLogger().error("Try to input incorrect name");
             IncorrectName.setVisible(true);
             flag = 1;
         }

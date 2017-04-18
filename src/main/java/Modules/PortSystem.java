@@ -180,8 +180,8 @@ public class PortSystem {
     public static void updateShipInf(Ship ship, int time){
         MapShips.getMapShips().getShip(ship.getName()).setQuantity(ship.getNeedQuantity());
         if(time > ship.getTime()){
-            int fine = time - ship.getTime();
-            MapShips.getMapShips().getShip(ship.getName()).setFine(ship.getFine() - time);
+            int fine = ship.getTime() - time;
+            MapShips.getMapShips().getShip(ship.getName()).setFine(ship.getFine() - fine);
             LoggerApp.getLogger().info("Ship " + ship.getName() + " Received a fine " + fine);
         }
     }
